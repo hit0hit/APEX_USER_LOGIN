@@ -35,6 +35,7 @@ A seguir está uma descrição da tabela SQL `apex_workspace_apex_users`:
 | PROFILE_CHARSET       |          | VARCHAR2(128)         |
 
 ## Exemplo de Resultado de Consulta
+https://docs.oracle.com/en/database/oracle/apex/23.1/aeapi/CREATE_USER-Procedure.html#GUID-95721E36-4DAB-4BCA-A6F3-AC2BACC52A66
 
 Aqui está um exemplo de resultado de consulta SQL a partir da tabela:
 
@@ -44,3 +45,64 @@ USER_NAME   | WORKSPACE_NAME
 MCDONAC     | ASKTOM
 ADMIN       | INTERNAL
 MCDONAC     | MCDONAC
+
+51.15 CREATE_USER Procedure
+
+Syntax
+APEX_UTIL.CREATE_USER (
+    p_user_id                       IN NUMBER   DEFAULT NULL,
+    p_user_name                     IN VARCHAR2,
+    p_first_name                    IN VARCHAR2 DEFAULT NULL,
+    p_last_name                     IN VARCHAR2 DEFAULT NULL,
+    p_description                   IN VARCHAR2 DEFAULT NULL,
+    p_email_address                 IN VARCHAR2 DEFAULT NULL,
+    p_web_password                  IN VARCHAR2,
+    p_web_password_format           IN VARCHAR2 DEFAULT 'CLEAR_TEXT',
+    p_group_ids                     IN VARCHAR2 DEFAULT NULL,
+    p_developer_privs               IN VARCHAR2 DEFAULT NULL,
+    p_default_schema                IN VARCHAR2 DEFAULT NULL,
+    p_allow_access_to_schemas       IN VARCHAR2 DEFAULT NULL,
+    p_account_expiry                IN DATE     DEFAULT TRUNC(SYSDATE),
+    p_account_locked                IN VARCHAR2 DEFAULT 'N',
+    p_failed_access_attempts        IN NUMBER   DEFAULT 0,
+    p_change_password_on_first_use  IN VARCHAR2 DEFAULT 'Y',
+    p_first_password_use_occurred   IN VARCHAR2 DEFAULT 'N',
+    p_attribute_01                  IN VARCHAR2 DEFAULT NULL,
+    p_attribute_02                  IN VARCHAR2 DEFAULT NULL,
+    p_attribute_03                  IN VARCHAR2 DEFAULT NULL,
+    p_attribute_04                  IN VARCHAR2 DEFAULT NULL,
+    p_attribute_05                  IN VARCHAR2 DEFAULT NULL,
+    p_attribute_06                  IN VARCHAR2 DEFAULT NULL,
+    p_attribute_07                  IN VARCHAR2 DEFAULT NULL,
+    p_attribute_08                  IN VARCHAR2 DEFAULT NULL,
+    p_attribute_09                  IN VARCHAR2 DEFAULT NULL,
+    p_attribute_10                  IN VARCHAR2 DEFAULT NULL,
+    p_allow_app_building_yn         IN VARCHAR2 DEFAULT NULL,
+    p_allow_sql_workshop_yn         IN VARCHAR2 DEFAULT NULL,
+    p_allow_websheet_dev_yn         IN VARCHAR2 DEFAULT NULL,
+    p_allow_team_development_yn     IN VARCHAR2 DEFAULT NULL );
+
+
+
+Example 1
+BEGIN
+    APEX_UTIL.CREATE_USER(
+        p_user_name    => 'NEWUSER1',
+        p_web_password => 'secret99');
+END;
+
+Example 2
+BEGIN
+    APEX_UTIL.CREATE_USER(
+        p_user_name                     => 'NEWUSER2',
+        p_first_name                    => 'FRANK',
+        p_last_name                     => 'SMITH',
+        p_description                   => 'Description...',
+        p_email_address                 => 'frank@smith.com',
+        p_web_password                  => 'password',
+        p_developer_privs               => 'ADMIN:CREATE:DATA_LOADER:EDIT:HELP:MONITOR:SQL',
+        p_default_schema                => 'MY_SCHEMA',
+        p_allow_access_to_schemas       => 'MY_SCHEMA2',
+        p_change_password_on_first_use  => 'N',
+        p_attribute_01                  => '123 456 7890');
+END;
